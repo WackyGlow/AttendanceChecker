@@ -1,0 +1,31 @@
+
+.borderpane {
+    -fx-background-image: url('../../Resources/Background.png') no-repeat center center fixed;
+}
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #000;
+    -fx-background-radius: 0;
+    -fx-background-color: #FFF;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-text-fill: #000;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: #000;
+    -fx-text-fill: #ffffff;
+}
+.label {
+    -fx-font-size: 18pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #000;
+}
+.text-field {
+    -fx-background-color: #FFF;
+    -fx-font-size: 18pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-border-color: #000;
+
+}

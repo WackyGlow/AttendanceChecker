@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bPane" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceChecker.GUI.Controllers.MainViewController">
+<BorderPane fx:id="bPane" minHeight="600.0" minWidth="800.0" styleClass="borderpane" stylesheets="@../CSS/Theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceChecker.GUI.Controllers.MainViewController">
    <center>
       <VBox maxHeight="150.0" maxWidth="300.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox>
                <children>
-                  <Label maxWidth="300.0" minWidth="300.0" text="Mark attendance:" textAlignment="CENTER">
+                  <Label fx:id="markAttendance" maxWidth="300.0" minWidth="300.0" styleClass="label" stylesheets="@../CSS/Theme.css" text="Mark attendance:" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -27,7 +27,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <TextField maxWidth="300.0" minWidth="300.0" promptText="Student ID">
+                  <TextField fx:id="studentIdField" maxWidth="300.0" minWidth="300.0" promptText="Student ID">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -36,7 +36,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="45.0">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="125.0" text="Confirm">
+                  <Button fx:id="confirmAttendance" mnemonicParsing="false" onAction="#handleConfirmAttendance" prefWidth="125.0" text="Confirm">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -53,7 +53,7 @@
       </VBox>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" text="Correct Error" BorderPane.alignment="TOP_LEFT">
+      <Button fx:id="correctError" mnemonicParsing="false" onAction="#handleCorrectError" text="Correct Error" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" />
          </BorderPane.margin>
@@ -63,12 +63,12 @@
       </Button>
    </bottom>
    <top>
-      <Label text="[DATE]" BorderPane.alignment="TOP_LEFT">
+      <Label fx:id="currentDate" styleClass="label" stylesheets="@../CSS/Theme.css" text="[DATE]" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
             <Insets left="20.0" top="20.0" />
          </BorderPane.margin>
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="22.0" />
          </font>
       </Label>
    </top>
