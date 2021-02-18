@@ -1,48 +1,22 @@
 package AttendanceChecker.DAL;
 
+import AttendanceChecker.BLL.Be.Student;
 import java.util.ArrayList;
 
+
 public class MockData {
-    public ArrayList<String> name;
-    public ArrayList<Integer> totalDays;
-    public ArrayList<Integer> absentDays;
-    public ArrayList<Integer> absentProcent;
-    public ArrayList<String> mostAbsentDay;
+    public ArrayList<Student> listOfStudents;
     public MockData() {
-        name.add("Lars");
-        name.add("Kim");
-        name.add("Bo");
-        totalDays.add(100);
-        totalDays.add(100);
-        totalDays.add(100);
-        absentDays.add(0);
-        absentDays.add(50);
-        absentDays.add(100);
-        absentProcent.add(0);
-        absentProcent.add(50);
-        absentProcent.add(100);
-        mostAbsentDay.add("Monday");
-        mostAbsentDay.add("Friday");
-        mostAbsentDay.add("Tuesday");
-    }
+        listOfStudents = new ArrayList<>();
 
-    public ArrayList<String> getName() {
-        return name;
     }
-
-    public ArrayList<Integer> getTotalDays() {
-        return totalDays;
-    }
-
-    public ArrayList<Integer> getAbsentDays() {
-        return absentDays;
-    }
-
-    public ArrayList<Integer> getAbsentProcent() {
-        return absentProcent;
-    }
-
-    public ArrayList<String> getMostAbsentDay() {
-        return mostAbsentDay;
+    public ArrayList<Student> getListOfStudents() {
+        Student lars = new Student("Lars",100,0,0,"Monday");
+        Student kim = new Student("Kim",100,50,50,"Friday");
+        Student bo = new Student("Bo",100,100,100,"Tuesday");
+        listOfStudents.add(lars);
+        listOfStudents.add(kim);
+        listOfStudents.add(bo);
+        return listOfStudents;
     }
 }

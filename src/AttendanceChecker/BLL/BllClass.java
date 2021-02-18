@@ -1,41 +1,22 @@
 package AttendanceChecker.BLL;
 
+import AttendanceChecker.BLL.Be.Student;
 import AttendanceChecker.DAL.MockData;
-
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class BllClass {
-    public ArrayList<String> name1;
-    public ArrayList<Integer> totalDays1;
-    public ArrayList<Integer> absentDays1;
-    public ArrayList<Integer> absentProcent1;
-    public ArrayList<String> mostAbsentDay1;
+
+    public ObservableList<Student> allStudents;
+    public MockData moD;
     public BllClass() {
-        MockData MoD = new MockData();
-        name1= MoD.getName();
-        totalDays1 = MoD.getTotalDays();
-        absentDays1 = MoD.getAbsentDays();
-        absentProcent1 = MoD.getAbsentProcent();
-        mostAbsentDay1 = MoD.getMostAbsentDay();
+        moD = new MockData();
     }
 
-    public ArrayList<String> getName1() {
-        return name1;
-    }
+    public ObservableList<Student> getListOfStudents() {
 
-    public ArrayList<Integer> getTotalDays1() {
-        return totalDays1;
-    }
-
-    public ArrayList<Integer> getAbsentDays1() {
-        return absentDays1;
-    }
-
-    public ArrayList<Integer> getAbsentProcent1() {
-        return absentProcent1;
-    }
-
-    public ArrayList<String> getMostAbsentDay1() {
-        return mostAbsentDay1;
+        allStudents = FXCollections.observableArrayList();
+        allStudents.addAll(moD.getListOfStudents());
+        return allStudents;
     }
 }

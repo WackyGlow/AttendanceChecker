@@ -9,7 +9,7 @@
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" styleClass="borderpane" stylesheets="@../CSS/Theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceChecker.GUI.Controllers.TeacherLoginViewController">
    <center>
-      <TableView maxHeight="450.0" maxWidth="750.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_CENTER">
+      <TableView fx:id="studentList" maxHeight="450.0" maxWidth="750.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_CENTER">
         <columns>
           <TableColumn fx:id="studentNameColumn" prefWidth="470.0" text="Name" />
           <TableColumn fx:id="studentDaysAbsentColumn" prefWidth="156.0" text="Days Absent" />
