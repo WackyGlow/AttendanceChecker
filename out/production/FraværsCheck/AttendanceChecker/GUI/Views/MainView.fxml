@@ -53,14 +53,26 @@
       </VBox>
    </center>
    <bottom>
-      <Button fx:id="correctError" mnemonicParsing="false" onAction="#handleCorrectError" text="Correct Error" BorderPane.alignment="TOP_LEFT">
+      <HBox BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" />
          </BorderPane.margin>
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
+         <children>
+            <Button fx:id="correctError" mnemonicParsing="false" onAction="#handleCorrectError" text="Correct Error">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="445.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="teacherLogin" mnemonicParsing="false" onAction="#handleTeacherLogin" text="Teacher Login">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </bottom>
    <top>
       <Label fx:id="currentDate" styleClass="label" stylesheets="@../CSS/Theme.css" text="[DATE]" BorderPane.alignment="TOP_LEFT">

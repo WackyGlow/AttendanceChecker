@@ -1,5 +1,4 @@
 package AttendanceChecker.GUI.Controllers;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,7 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -39,6 +37,8 @@ public class MainViewController implements Initializable {
     public BorderPane bPane;
     @FXML
     public Label markAttendance;
+    @FXML
+    public Button teacherLogin;
 
 
     @Override
@@ -71,7 +71,24 @@ public class MainViewController implements Initializable {
             Parent root = FXMLLoader.load(url);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Hello World");
+            stage.setTitle("Correct Attendance Error");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleTeacherLogin(ActionEvent actionEvent) {
+        try {
+            URL urlTeacher = new File("src/AttendanceChecker/GUI/Views/TeacherLoginView.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(urlTeacher);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Hello Teacher");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.setScene(scene);
