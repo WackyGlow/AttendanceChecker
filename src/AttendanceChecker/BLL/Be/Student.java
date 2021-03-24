@@ -3,18 +3,22 @@ package AttendanceChecker.BLL.Be;
 import javafx.beans.property.*;
 
 public class Student {
+    private final int id;
     private StringProperty name;
     private ObjectProperty<Integer> totalDays;
     private ObjectProperty<Integer> absentDays;
     private ObjectProperty<Integer> absentPercent;
     private StringProperty mostAbsentDay;
+    private boolean presentToday;
 
-    public Student(String name, int totalDays, int absentDays, int absentPercent,String mostAbsentDay){
+    public Student(int id,String name, int totalDays, int absentDays, int absentPercent,String mostAbsentDay, boolean presentToday){
+        this.id = id;
         this.name = new SimpleStringProperty(name);
         this.totalDays = new SimpleIntegerProperty(totalDays).asObject();
         this.absentDays = new SimpleIntegerProperty(absentDays).asObject();
         this.absentPercent = new SimpleIntegerProperty(absentPercent).asObject();
         this.mostAbsentDay = new SimpleStringProperty(mostAbsentDay);
+        this.presentToday = presentToday;
     }
 
     public String getName() {
