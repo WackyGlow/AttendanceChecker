@@ -1,6 +1,6 @@
 package AttendanceChecker.DAL;
 
-import AttendanceChecker.BLL.Be.Student;
+import AttendanceChecker.Be.Student;
 import java.util.ArrayList;
 
 

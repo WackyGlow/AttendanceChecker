@@ -1,4 +1,4 @@
-package AttendanceChecker.BLL.Be;
+package AttendanceChecker.Be;
 
 import javafx.beans.property.*;
 

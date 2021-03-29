@@ -1,13 +1,9 @@
 package AttendanceChecker.DAL.DAO;
 
-import AttendanceChecker.BLL.Be.Student;
+import AttendanceChecker.Be.Student;
 import AttendanceChecker.DAL.DBConnection.JDBCConnectionPool;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 

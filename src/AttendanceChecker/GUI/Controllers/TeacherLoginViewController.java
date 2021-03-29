@@ -1,8 +1,7 @@
 package AttendanceChecker.GUI.Controllers;
 
-import AttendanceChecker.BLL.Be.Student;
+import AttendanceChecker.Be.Student;
 import AttendanceChecker.BLL.BllClass;
-import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
