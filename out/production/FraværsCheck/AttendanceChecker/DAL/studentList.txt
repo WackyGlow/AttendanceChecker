@@ -1,5 +1,0 @@
-Bobby Olsen,100,0,0,None
-John Olsen,100,10,10,Monday
-Bobine Hansen,100,25,25,Tuesday
-Frida Børgesen,100,50,50,Wednesday
-Tyrone Dawson,100,100,100,Friday

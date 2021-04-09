@@ -25,7 +25,7 @@ public class StudentDAO {
             if (statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("Id");
+                    int id = resultSet.getInt("StudentId");
                     String name = resultSet.getString("StudentName");
                     int absentDays = resultSet.getInt("AbsentDays");
                     boolean presentToday = resultSet.getBoolean("PresentToday");

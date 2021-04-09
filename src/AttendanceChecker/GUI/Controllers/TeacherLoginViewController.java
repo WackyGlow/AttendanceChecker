@@ -1,6 +1,7 @@
 package AttendanceChecker.GUI.Controllers;
 
 import AttendanceChecker.Be.Student;
+import AttendanceChecker.GUI.Model.StudentModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ public class TeacherLoginViewController implements Initializable {
     private static int studentInfoDaysAbsent;
     private static int studentInfoTotalDays;
     private static int studentInfoPercentageAbsence;
+    private StudentModel studentModel;
 
     @FXML
     public Button showInfo;
@@ -42,13 +44,18 @@ public class TeacherLoginViewController implements Initializable {
     public TableColumn<Student, Integer> studentDaysAbsentColumn;
 
 
-    public TeacherLoginViewController() {
-        studentList = new TableView<>();
 
+    public TeacherLoginViewController() throws IOException {
+        studentList = new TableView<>();
+        studentModel = new StudentModel();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // studentObservableList =
+        try {
+            studentObservableList = studentModel.getAllStudents();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         studentNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         //studentAttendanceColumn.setCellValueFactory(cellData -> cellData.getValue().absentPercentProperty());
         //studentDaysAbsentColumn.setCellValueFactory(cellData -> cellData.getValue().totalDaysProperty());
