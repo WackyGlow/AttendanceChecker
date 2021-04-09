@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TeacherLoginViewController implements Initializable {
+
     private ObservableList<Student> studentObservableList;
     private static Student selectedStudent;
     private static String studentInfoName;
@@ -32,6 +33,8 @@ public class TeacherLoginViewController implements Initializable {
 
     @FXML
     public Button showInfo;
+    @FXML
+    public Button correctErrorButton;
     @FXML
     public Button logoutTeacher;
     @FXML
@@ -108,5 +111,22 @@ public class TeacherLoginViewController implements Initializable {
     public void handleLogoutTeacher(ActionEvent actionEvent) {
         Stage stage = (Stage) logoutTeacher.getScene().getWindow();
         stage.close();
+    }
+
+    public void handleCorrectErrorButton(ActionEvent actionEvent) {
+        try {
+            URL url = new File("src/AttendanceChecker/GUI/Views/CorrectErrorView.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Correct Attendance Error");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
