@@ -1,4 +1,5 @@
 package AttendanceChecker.GUI.Controllers;
+import AttendanceChecker.GUI.Model.StudentModel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
-
+    private StudentModel studentModel;
     @FXML
     public Button confirmAttendance;
     @FXML
@@ -40,7 +41,13 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initClock();
+        try {
+            studentModel = new StudentModel();
+            initClock();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void initClock() {
@@ -53,6 +60,7 @@ public class MainViewController implements Initializable {
     }
 
     public void handleConfirmAttendance(ActionEvent actionEvent) {
+
         try {
             URL url = new File("src/AttendanceChecker/GUI/Views/MoreInfoViewController.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);

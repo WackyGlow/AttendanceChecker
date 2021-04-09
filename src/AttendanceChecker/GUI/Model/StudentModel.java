@@ -20,5 +20,8 @@ public class StudentModel {
         allStudents.addAll(studentManager.getAllStudents());
         return allStudents;
     }
+    public Student getStudentFromLogin(String login,String password){
+        return studentManager.getStudentFromLogin(login, password);
+    }
 }
 
