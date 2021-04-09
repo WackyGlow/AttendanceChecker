@@ -60,5 +60,4 @@ public class MoreInfoViewController implements Initializable {
         students = studentModel.getAllStudents();
         return students;
     }
-
 }
