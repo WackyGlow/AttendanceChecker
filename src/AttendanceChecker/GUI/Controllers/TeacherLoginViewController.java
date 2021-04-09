@@ -58,7 +58,7 @@ public class TeacherLoginViewController implements Initializable {
         }
         studentNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         //studentAttendanceColumn.setCellValueFactory(cellData -> cellData.getValue().absentPercentProperty());
-        //studentDaysAbsentColumn.setCellValueFactory(cellData -> cellData.getValue().totalDaysProperty());
+        studentDaysAbsentColumn.setCellValueFactory(cellData -> cellData.getValue().absentDaysProperty());
         studentList.setItems(studentObservableList);
     }
     public void handleShowInfo(ActionEvent actionEvent) throws IOException {
