@@ -1,43 +1,38 @@
 package AttendanceChecker.Be;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.List;
 
 public class Teacher {
-    private int id;
-    private String name;
-    private String teachercode;
+    private final int id;
+    private StringProperty name;
+    private StringProperty teachercode;
     private List<Course> courses;
     private List<Integer> courseId;
 
 
     public Teacher(int id, String name, String teachercode){
         this.id = id;
-        this.name = name;
-        this.teachercode = teachercode;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.name = new SimpleStringProperty(name);
+        this.teachercode = new SimpleStringProperty(teachercode);
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getTeachercode() {
-        return teachercode;
+        return teachercode.get();
     }
 
     public void setTeachercode(String teachercode) {
-        this.teachercode = teachercode;
+        this.teachercode.set(teachercode);
     }
 
 }
