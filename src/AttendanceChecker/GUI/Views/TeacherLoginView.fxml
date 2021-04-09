@@ -2,10 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" styleClass="borderpane" stylesheets="@../CSS/Theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceChecker.GUI.Controllers.TeacherLoginViewController">
    <center>
@@ -25,7 +28,12 @@
          <children>
             <Button fx:id="showInfo" mnemonicParsing="false" onAction="#handleShowInfo" text="Show Info">
                <HBox.margin>
-                  <Insets right="511.0" />
+                  <Insets right="177.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="correctErrorButton" layoutX="10.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleCorrectErrorButton" text="Correct Error">
+               <HBox.margin>
+                  <Insets right="179.0" />
                </HBox.margin>
             </Button>
             <Button fx:id="logoutTeacher" mnemonicParsing="false" onAction="#handleLogoutTeacher" text="Logout" />
@@ -38,4 +46,20 @@
          </padding>
       </HBox>
    </bottom>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Select course:">
+               <VBox.margin>
+                  <Insets left="26.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <ChoiceBox fx:id="teacherCourseSelect" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="26.0" />
+               </VBox.margin>
+            </ChoiceBox>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>

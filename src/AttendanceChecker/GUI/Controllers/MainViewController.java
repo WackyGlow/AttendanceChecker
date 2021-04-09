@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,11 +23,9 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
 
     @FXML
-    public Button correctError;
-    @FXML
     public Button confirmAttendance;
     @FXML
-    public TextField studentIdField;
+    public TextField loginIdField;
     @FXML
     public Label currentDate;
     @FXML
@@ -39,6 +34,8 @@ public class MainViewController implements Initializable {
     public Label markAttendance;
     @FXML
     public Button teacherLogin;
+    @FXML
+    public PasswordField passwordField;
 
 
     @Override
@@ -56,18 +53,8 @@ public class MainViewController implements Initializable {
     }
 
     public void handleConfirmAttendance(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("");
-        alert.setContentText("You attendance has been marked.");
-        alert.showAndWait();
-        studentIdField.clear();
-
-    }
-
-    public void handleCorrectError(ActionEvent actionEvent) {
         try {
-            URL url = new File("src/AttendanceChecker/GUI/Views/CorrectErrorView.fxml").toURI().toURL();
+            URL url = new File("src/AttendanceChecker/GUI/Views/MoreInfoViewController.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -75,6 +62,7 @@ public class MainViewController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.setScene(scene);
+            loginIdField.clear();
             stage.show();
 
         } catch (IOException e) {
