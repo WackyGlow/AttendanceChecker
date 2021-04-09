@@ -12,6 +12,8 @@ public class TimeManagerTask {
 
         public void run()
         {
+            //needs a for each loop that adds absent days to unmarked students, as
+            //as well as a method to add 1 day to total days in the database
             System.out.println("success 2");
         }
     }

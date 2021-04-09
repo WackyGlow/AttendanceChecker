@@ -20,7 +20,7 @@ public class TimeManager {
      * the variabels hour, minute and second.
      * @throws ParseException
      */
-    public void schedualAtTimeTest() throws ParseException {
+    public void timeKeeper() throws ParseException {
         Calendar goTime = Calendar.getInstance();
         goTime.set(Calendar.HOUR_OF_DAY, hour);
         goTime.set(Calendar.MINUTE, minute);
