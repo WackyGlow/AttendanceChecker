@@ -1,5 +1,8 @@
 package AttendanceChecker.GUI.Controllers;
 
+import AttendanceChecker.BLL.StudentManager;
+import AttendanceChecker.Be.Student;
+import AttendanceChecker.GUI.Model.StudentModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,6 +33,10 @@ public class MoreInfoViewController implements Initializable {
     @FXML
     public Label selectedStudentPercentageAbsence;
 
+    private StudentManager studentManager;
+    private ObservableList<Student> students;
+    private StudentModel studentModel;
+
     public void handleCloseMoreInfo(ActionEvent actionEvent) {
         Stage stage = (Stage) closeMoreInfo.getScene().getWindow();
         stage.close();
@@ -47,4 +55,10 @@ public class MoreInfoViewController implements Initializable {
         selectedStudentTotalAbsenceDays.setText(String.valueOf(TeacherLoginViewController.getStudentInfoDaysAbsent()));
         selectedStudentPercentageAbsence.setText(TeacherLoginViewController.getStudentInfoPercentageAbsence()+"%");
     }
+
+    public ObservableList<Student> getAllStudents() throws IOException {
+        students = studentModel.getAllStudents();
+        return students;
+    }
+
 }

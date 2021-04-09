@@ -1,7 +1,6 @@
 package AttendanceChecker.GUI.Controllers;
 
 import AttendanceChecker.Be.Student;
-import AttendanceChecker.BLL.BllClass;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +21,6 @@ import java.util.ResourceBundle;
 
 public class TeacherLoginViewController implements Initializable {
     private ObservableList<Student> studentObservableList;
-    private BllClass bll;
     private static Student selectedStudent;
     private static String studentInfoName;
     private static String studentInfoMostAbsentDay;
@@ -45,25 +43,24 @@ public class TeacherLoginViewController implements Initializable {
 
 
     public TeacherLoginViewController() {
-        bll = new BllClass();
         studentList = new TableView<>();
 
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        studentObservableList = bll.getListOfStudents();
+        // studentObservableList =
         studentNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        studentAttendanceColumn.setCellValueFactory(cellData -> cellData.getValue().absentPercentProperty());
-        studentDaysAbsentColumn.setCellValueFactory(cellData -> cellData.getValue().totalDaysProperty());
+        //studentAttendanceColumn.setCellValueFactory(cellData -> cellData.getValue().absentPercentProperty());
+        //studentDaysAbsentColumn.setCellValueFactory(cellData -> cellData.getValue().totalDaysProperty());
         studentList.setItems(studentObservableList);
     }
     public void handleShowInfo(ActionEvent actionEvent) throws IOException {
         selectedStudent = studentList.getSelectionModel().getSelectedItem();
         studentInfoName = selectedStudent.getName();
-        studentInfoMostAbsentDay = selectedStudent.getMostAbsentDay();
+        //studentInfoMostAbsentDay = selectedStudent.getMostAbsentDay();
         studentInfoDaysAbsent = selectedStudent.getAbsentDays();
-        studentInfoTotalDays = selectedStudent.getTotalDays();
-        studentInfoPercentageAbsence = selectedStudent.getAbsentPercent();
+        //studentInfoTotalDays = selectedStudent.getTotalDays();
+        //studentInfoPercentageAbsence = selectedStudent.getAbsentPercent();
         if (selectedStudent != null) {
             URL urlMoreInfo = new File("src/AttendanceChecker/GUI/Views/MoreInfoView.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(urlMoreInfo);
