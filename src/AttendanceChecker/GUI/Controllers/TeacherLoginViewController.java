@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
@@ -21,7 +22,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TeacherLoginViewController implements Initializable {
-
+    
     private ObservableList<Student> studentObservableList;
     private static Student selectedStudent;
     private static String studentInfoName;
@@ -31,6 +32,8 @@ public class TeacherLoginViewController implements Initializable {
     private static int studentInfoPercentageAbsence;
     private StudentModel studentModel;
 
+    @FXML
+    public ChoiceBox teacherCourseSelect;
     @FXML
     public Button showInfo;
     @FXML
