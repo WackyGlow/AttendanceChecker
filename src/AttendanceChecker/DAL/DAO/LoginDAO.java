@@ -20,7 +20,7 @@ public class LoginDAO {
     }
 
 
-    public Student getAllStudents(String login, String password){
+    public Student getStudentFromLogin(String login, String password){
 
         try (Connection connection = connectionPool.checkOut()) {
             String sql = "Select * from Student INNER JOIN StudentLogin ON Student.StudentID = StudentLogin.StudentID WHERE StudentLogin.StudentLogin = " + login +" AND StudentLogin.StudentPassword = " + password;

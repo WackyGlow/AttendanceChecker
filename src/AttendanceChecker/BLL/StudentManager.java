@@ -19,6 +19,9 @@ public class StudentManager {
     public List<Student> getAllStudents() throws IOException{
         return studentDAO.getAllStudents();
     }
+    public Student getStudentFromLogin(String login,String password){
+        return loginDAO.getStudentFromLogin(login,password);
+    }
 
 
 
