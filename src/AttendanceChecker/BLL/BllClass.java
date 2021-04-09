@@ -1,7 +1,6 @@
 package AttendanceChecker.BLL;
 
 import AttendanceChecker.Be.Student;
-import AttendanceChecker.DAL.MockData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
