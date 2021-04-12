@@ -1,5 +1,8 @@
 package AttendanceChecker.BLL;
 
+import AttendanceChecker.Be.Student;
+
+import java.util.List;
 import java.util.TimerTask;
 
 public class TimeManagerTask {
@@ -9,12 +12,21 @@ public class TimeManagerTask {
      */
     public static class MyTimeTask extends TimerTask
     {
+        private List<Student> listOfStudents;
 
         public void run()
         {
             //needs a for each loop that adds absent days to unmarked students, as
             //as well as a method to add 1 day to total days in the database
-            System.out.println("success 2");
+            for (Student S: listOfStudents) {
+                if(S.isPresentToday() == false){
+                    //add absent day in database
+                }
+                if(S.isPresentToday() == true){
+                    //set isPresentTOday to flase in database
+                }
+
+            }
         }
     }
 }

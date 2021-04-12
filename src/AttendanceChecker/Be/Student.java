@@ -15,6 +15,10 @@ public class Student {
         this.presentToday = presentToday;
     }
 
+    public boolean isPresentToday() {
+        return presentToday;
+    }
+
     public String getName() {
         return name.get();
     }
