@@ -1,7 +1,10 @@
 package AttendanceChecker.BLL;
 
 import AttendanceChecker.Be.Student;
+import AttendanceChecker.DAL.DAO.StudentDAO;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -18,12 +21,21 @@ public class TimeManagerTask {
         {
             //needs a for each loop that adds absent days to unmarked students, as
             //as well as a method to add 1 day to total days in the database
+            listOfStudents = new ArrayList<>();
+            StudentDAO sGetter = null;
+            try {
+                sGetter = new StudentDAO();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            assert sGetter != null;
+            listOfStudents = sGetter.getAllStudents();
             for (Student S: listOfStudents) {
                 if(S.isPresentToday() == false){
                     //add absent day in database
                 }
                 if(S.isPresentToday() == true){
-                    //set isPresentTOday to flase in database
+                    //set isPresentToday to false in database
                 }
 
             }
