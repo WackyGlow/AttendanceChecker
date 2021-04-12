@@ -1,4 +1,6 @@
 package AttendanceChecker.GUI.Controllers;
+import AttendanceChecker.BLL.StudentManager;
+import AttendanceChecker.Be.Student;
 import AttendanceChecker.GUI.Model.StudentModel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -17,6 +19,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -37,7 +40,14 @@ public class MainViewController implements Initializable {
     public Button teacherLogin;
     @FXML
     public PasswordField passwordField;
-
+    private static String writtenLoginID;
+    private static String writtenPassword;
+    private static Student selectedStudent;
+    private static String studentInfoName;
+    private static String studentInfoMostAbsentDay;
+    private static int studentInfoDaysAbsent;
+    private static int studentInfoTotalDays;
+    private static int studentInfoPercentageAbsence;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,22 +69,30 @@ public class MainViewController implements Initializable {
         clock.play();
     }
 
-    public void handleConfirmAttendance(ActionEvent actionEvent) {
-
-        try {
-            URL url = new File("src/AttendanceChecker/GUI/Views/MoreInfoViewController.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
+    public void handleConfirmAttendance(ActionEvent actionEvent) throws Exception {
+        writtenLoginID = loginIdField.getText();
+        writtenPassword = passwordField.getText();
+        selectedStudent = studentModel.getStudentFromLogin(writtenLoginID,writtenPassword);
+        if (selectedStudent != null){
+            studentInfoName = studentModel.getStudentFromLogin(writtenLoginID,writtenPassword).getName();
+            studentInfoDaysAbsent = studentModel.getStudentFromLogin(writtenLoginID,writtenPassword).getAbsentDays();
+            URL urlMoreInfo = new File("src/AttendanceChecker/GUI/Views/StudentView.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(urlMoreInfo);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Correct Attendance Error");
+            stage.setTitle("More Student Info");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.setScene(scene);
-            loginIdField.clear();
             stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Occured");
+            alert.setHeaderText("Wrong Login");
+            alert.setContentText("Please try again!");
+            alert.showAndWait();
+            loginIdField.clear();
+            passwordField.clear();
         }
     }
 
@@ -93,5 +111,29 @@ public class MainViewController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Student getSelectedStudent() {
+        return selectedStudent;
+    }
+
+    public static String getStudentInfoName() {
+        return studentInfoName;
+    }
+
+    public static String getStudentInfoMostAbsentDay() {
+        return studentInfoMostAbsentDay;
+    }
+
+    public static int getStudentInfoDaysAbsent() {
+        return studentInfoDaysAbsent;
+    }
+
+    public static int getStudentInfoTotalDays() {
+        return studentInfoTotalDays;
+    }
+
+    public static int getStudentInfoPercentageAbsence() {
+        return studentInfoPercentageAbsence;
     }
 }

@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class StudentModel {
     private StudentManager studentManager;
@@ -20,7 +21,7 @@ public class StudentModel {
         allStudents.addAll(studentManager.getAllStudents());
         return allStudents;
     }
-    public Student getStudentFromLogin(String login,String password){
+    public Student getStudentFromLogin(String login,String password) throws SQLException {
         return studentManager.getStudentFromLogin(login, password);
     }
 }
