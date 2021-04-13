@@ -25,11 +25,6 @@ public class TeacherLoginViewController implements Initializable {
     
     private ObservableList<Student> studentObservableList;
     private static Student selectedStudent;
-    private static String studentInfoName;
-    private static String studentInfoMostAbsentDay;
-    private static int studentInfoDaysAbsent;
-    private static int studentInfoTotalDays;
-    private static int studentInfoPercentageAbsence;
     private StudentModel studentModel;
 
     @FXML
@@ -63,17 +58,13 @@ public class TeacherLoginViewController implements Initializable {
             e.printStackTrace();
         }
         studentNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        // Mangler implementering
         //studentAttendanceColumn.setCellValueFactory(cellData -> cellData.getValue().absentPercentProperty());
         studentDaysAbsentColumn.setCellValueFactory(cellData -> cellData.getValue().absentDaysProperty());
         studentList.setItems(studentObservableList);
     }
     public void handleShowInfo(ActionEvent actionEvent) throws IOException {
         selectedStudent = studentList.getSelectionModel().getSelectedItem();
-        studentInfoName = selectedStudent.getName();
-        //studentInfoMostAbsentDay = selectedStudent.getMostAbsentDay();
-        studentInfoDaysAbsent = selectedStudent.getAbsentDays();
-        //studentInfoTotalDays = selectedStudent.getTotalDays();
-        //studentInfoPercentageAbsence = selectedStudent.getAbsentPercent();
         if (selectedStudent != null) {
             URL urlMoreInfo = new File("src/AttendanceChecker/GUI/Views/MoreInfoView.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(urlMoreInfo);
@@ -91,25 +82,6 @@ public class TeacherLoginViewController implements Initializable {
         return selectedStudent;
     }
 
-    public static String getStudentInfoName() {
-        return studentInfoName;
-    }
-
-    public static String getStudentInfoMostAbsentDay() {
-        return studentInfoMostAbsentDay;
-    }
-
-    public static int getStudentInfoDaysAbsent() {
-        return studentInfoDaysAbsent;
-    }
-
-    public static int getStudentInfoTotalDays() {
-        return studentInfoTotalDays;
-    }
-
-    public static int getStudentInfoPercentageAbsence() {
-        return studentInfoPercentageAbsence;
-    }
 
     public void handleLogoutTeacher(ActionEvent actionEvent) {
         Stage stage = (Stage) logoutTeacher.getScene().getWindow();

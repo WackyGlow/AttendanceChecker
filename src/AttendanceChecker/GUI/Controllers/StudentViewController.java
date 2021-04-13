@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements Initializable {
+    private Student selectedStudent;
     @FXML
     public Label selectedStudentName;
     @FXML
@@ -38,16 +39,17 @@ public class StudentViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        selectedStudentName.setText(MainViewController.getStudentInfoName());
+        selectedStudent = MainViewController.getSelectedStudent();
+        selectedStudentName.setText(selectedStudent.getName());
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("Absent", MainViewController.getStudentInfoDaysAbsent()),
-                        // (Total Days - Days Absent) skal stå herunder
-                        new PieChart.Data("Present", 100));
+                        new PieChart.Data("Absent", selectedStudent.getAbsentDays()),
+                        // (Total Days - Days Absent) skal stå herunder i stedet for 100
+                        new PieChart.Data("Present", (100-selectedStudent.getAbsentDays())));
         absencePieChart.setData(pieChartData);
         absencePieChart.setTitle("Absence chart:");
-        //selectedStudentMostAbsentDay.setText(TeacherLoginViewController.getStudentInfoMostAbsentDay());
-        //selectedStudentTotalAbsenceDays.setText(String.valueOf(TeacherLoginViewController.getStudentInfoDaysAbsent()));
-        //selectedStudentPercentageAbsence.setText(TeacherLoginViewController.getStudentInfoPercentageAbsence()+"%");
+        selectedStudentMostAbsentDay.setText(selectedStudent.getAbsentDays() + "");
+        selectedStudentTotalAbsenceDays.setText(selectedStudent.getAbsentDays() + "");
+        selectedStudentPercentageAbsence.setText(selectedStudent.getAbsentDays() +"%");
     }
 }

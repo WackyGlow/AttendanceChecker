@@ -29,11 +29,11 @@ public class LoginDAO {
         ResultSet resultSet = statement.executeQuery();
         Student student = null;
         if (resultSet.next()) {
-            student = new Student(id,name,absentDays,presentToday);
             id = resultSet.getInt("StudentId");
             name = resultSet.getString("StudentName");
             absentDays = resultSet.getInt("AbsentDays");
             presentToday = resultSet.getBoolean("PresentToday");
+            student = new Student(id,name,absentDays,presentToday);
         }
         return student;
     }

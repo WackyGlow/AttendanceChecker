@@ -43,11 +43,6 @@ public class MainViewController implements Initializable {
     private static String writtenLoginID;
     private static String writtenPassword;
     private static Student selectedStudent;
-    private static String studentInfoName;
-    private static String studentInfoMostAbsentDay;
-    private static int studentInfoDaysAbsent;
-    private static int studentInfoTotalDays;
-    private static int studentInfoPercentageAbsence;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,8 +69,6 @@ public class MainViewController implements Initializable {
         writtenPassword = passwordField.getText();
         selectedStudent = studentModel.getStudentFromLogin(writtenLoginID,writtenPassword);
         if (selectedStudent != null){
-            studentInfoName = studentModel.getStudentFromLogin(writtenLoginID,writtenPassword).getName();
-            studentInfoDaysAbsent = studentModel.getStudentFromLogin(writtenLoginID,writtenPassword).getAbsentDays();
             URL urlMoreInfo = new File("src/AttendanceChecker/GUI/Views/StudentView.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(urlMoreInfo);
             Scene scene = new Scene(root);
@@ -87,7 +80,7 @@ public class MainViewController implements Initializable {
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Occured");
+            alert.setTitle("Error occurred");
             alert.setHeaderText("Wrong Login");
             alert.setContentText("Please try again!");
             alert.showAndWait();
@@ -115,25 +108,5 @@ public class MainViewController implements Initializable {
 
     public static Student getSelectedStudent() {
         return selectedStudent;
-    }
-
-    public static String getStudentInfoName() {
-        return studentInfoName;
-    }
-
-    public static String getStudentInfoMostAbsentDay() {
-        return studentInfoMostAbsentDay;
-    }
-
-    public static int getStudentInfoDaysAbsent() {
-        return studentInfoDaysAbsent;
-    }
-
-    public static int getStudentInfoTotalDays() {
-        return studentInfoTotalDays;
-    }
-
-    public static int getStudentInfoPercentageAbsence() {
-        return studentInfoPercentageAbsence;
     }
 }

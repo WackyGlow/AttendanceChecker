@@ -29,9 +29,8 @@ public class MoreInfoViewController implements Initializable {
     @FXML
     public Button closeMoreInfo;
     @FXML
-    public Button loadChart;
-    @FXML
     public Label selectedStudentPercentageAbsence;
+    private Student selectedStudent;
 
     private StudentManager studentManager;
     private ObservableList<Student> students;
@@ -44,20 +43,17 @@ public class MoreInfoViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        selectedStudentName.setText(TeacherLoginViewController.getStudentInfoName());
+        selectedStudent = TeacherLoginViewController.getSelectedStudent();
+        selectedStudentName.setText(selectedStudent.getName());
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("Absent", TeacherLoginViewController.getStudentInfoDaysAbsent()),
-                        new PieChart.Data("Present", (TeacherLoginViewController.getStudentInfoTotalDays()-TeacherLoginViewController.getStudentInfoDaysAbsent())));
+                        new PieChart.Data("Absent", selectedStudent.getAbsentDays()),
+                        new PieChart.Data("Present", (100-selectedStudent.getAbsentDays())));
         absencePieChart.setData(pieChartData);
         absencePieChart.setTitle("Absence chart:");
-        selectedStudentMostAbsentDay.setText(TeacherLoginViewController.getStudentInfoMostAbsentDay());
-        selectedStudentTotalAbsenceDays.setText(String.valueOf(TeacherLoginViewController.getStudentInfoDaysAbsent()));
-        selectedStudentPercentageAbsence.setText(TeacherLoginViewController.getStudentInfoPercentageAbsence()+"%");
-    }
-
-    public ObservableList<Student> getAllStudents() throws IOException {
-        students = studentModel.getAllStudents();
-        return students;
+        // Mangler implementering!
+        //selectedStudentMostAbsentDay.setText();
+        //selectedStudentTotalAbsenceDays.setText();
+        //selectedStudentPercentageAbsence.setText();
     }
 }
