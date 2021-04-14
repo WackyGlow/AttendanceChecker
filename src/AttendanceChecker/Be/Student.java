@@ -43,4 +43,8 @@ public class Student {
         this.absentDays.set(absentDays);
     }
 
+    public int getID(){
+        return this.id;
+    }
+
 }
