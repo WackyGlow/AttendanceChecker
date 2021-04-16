@@ -111,6 +111,42 @@ public class StudentDAO {
         }
     }
 
+
+    public int getValueFromDay(Student student, String specifiedDay){
+        int value = 0;
+        int studentID = student.getID();
+        try (Connection connection = connectionPool.checkOut()) {
+            String sql = "SELECT "+ specifiedDay +" FROM MostAbsentDay WHERE StudentID = " + studentID + ";";
+            Statement statement = connection.createStatement();
+            if (statement.execute(sql)) {
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next()) {
+                    value = resultSet.getInt(specifiedDay);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return value;
+    }
+
+    public void addToMostAbsentDay(Student student, String specifiedDay) throws SQLException {
+        Connection con = connectionPool.checkOut();
+        int studentId = student.getID();
+        String day = specifiedDay.substring(0,1).toUpperCase() + specifiedDay.substring(1).toLowerCase();
+        int oldValueFromDay =getValueFromDay(student,day);
+        int valuetoAdd = 1;
+        String sql = "UPDATE MostAbsentDay SET "+ day +" = " + (oldValueFromDay + valuetoAdd) + " WHERE StudentID = " + studentId + ";";
+        try (PreparedStatement st = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
+            st.executeUpdate();
+        } catch (SQLException exception){
+            throw new SQLException("could not add absence to "day" for:" + student.getName(), exception);
+
+        } finally {
+            connectionPool.checkIn(con);
+        }
+    }
+
 }
 
 
