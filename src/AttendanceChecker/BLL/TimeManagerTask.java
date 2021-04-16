@@ -4,6 +4,7 @@ import AttendanceChecker.Be.Student;
 import AttendanceChecker.DAL.DAO.StudentDAO;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
@@ -35,7 +36,11 @@ public class TimeManagerTask {
                     //add absent day in database
                 }
                 if(S.isPresentToday() == true){
-                    //set isPresentToday to false in database
+                    try {
+                        sGetter.changeIsPresentBack(S);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
 
             }

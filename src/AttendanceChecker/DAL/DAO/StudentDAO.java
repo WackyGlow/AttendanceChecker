@@ -53,6 +53,26 @@ public class StudentDAO {
     }
 
 
+    public void addToAbsentDays(Student student) throws SQLException {
+        int studentID = student.getID();
+        int absentDays = student.getAbsentDays();
+        Connection con = connectionPool.checkOut();
+        String sql = "UPDATE Student SET AbsentDays =" + absentDays++ + "WHERE StudentID =" + studentID + ";";
+        try (PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            throw new SQLException("Could not update AbsentDays in Student",ex);
+        } finally {
+            connectionPool.checkIn(con);
+        }
+    }
+
+    /* public void addToTotalDays() throws SQLException {
+        Connection con = connectionPool.checkOut();
+        int totalDays =
+        String sql = "UPDATE TotalDays SET Totaldays";
+    }
+    */
 }
 
 
