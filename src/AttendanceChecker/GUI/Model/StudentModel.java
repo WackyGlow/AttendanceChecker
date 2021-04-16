@@ -24,5 +24,8 @@ public class StudentModel {
     public Student getStudentFromLogin(String login,String password) throws SQLException {
         return studentManager.getStudentFromLogin(login, password);
     }
+    public int getTotalDays() throws SQLException {
+        return studentManager.getTotalDays();
+    }
 }
 
