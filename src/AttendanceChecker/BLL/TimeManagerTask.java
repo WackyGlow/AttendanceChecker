@@ -6,6 +6,7 @@ import AttendanceChecker.DAL.DAO.StudentDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -23,6 +24,24 @@ public class TimeManagerTask {
             //needs a for each loop that adds absent days to unmarked students, as
             //as well as a method to add 1 day to total days in the database
             listOfStudents = new ArrayList<>();
+            Calendar c = Calendar.getInstance();
+            int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+            String day = "day";
+            if(dayOfWeek == 2){
+                day = "monday";
+            }
+            else if(dayOfWeek == 3){
+                day = "Tuesday";
+            }
+            else if(dayOfWeek == 4){
+                day = "wednesday";
+            }
+            else if(dayOfWeek == 5){
+                day = "thursday";
+            }
+            else if(dayOfWeek == 6){
+                day = "friday";
+            }
             StudentDAO sGetter = null;
             try {
                 sGetter = new StudentDAO();
@@ -35,6 +54,11 @@ public class TimeManagerTask {
                 if(S.isPresentToday() == false){
                     try {
                         sGetter.addToAbsentDays(S);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    try {
+                        sGetter.addToMostAbsentDay(S, day);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
