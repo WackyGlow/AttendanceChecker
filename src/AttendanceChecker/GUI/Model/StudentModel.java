@@ -1,5 +1,6 @@
 package AttendanceChecker.GUI.Model;
 
+import AttendanceChecker.BLL.AttendanceManager;
 import AttendanceChecker.BLL.StudentManager;
 import AttendanceChecker.Be.Student;
 import javafx.collections.FXCollections;
@@ -9,11 +10,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class StudentModel {
+    private AttendanceManager attendanceManager;
     private StudentManager studentManager;
     private ObservableList<Student> allStudents = FXCollections.observableArrayList();
 
     public StudentModel() throws IOException {
         studentManager = new StudentManager();
+        attendanceManager = new AttendanceManager();
     }
 
     public ObservableList<Student> getAllStudents() throws IOException {
@@ -26,6 +29,9 @@ public class StudentModel {
     }
     public int getTotalDays() throws SQLException {
         return studentManager.getTotalDays();
+    }
+    public void markAsPresent(Student student) throws IOException, SQLException {
+        attendanceManager.markAsPresent(student);
     }
 }
 

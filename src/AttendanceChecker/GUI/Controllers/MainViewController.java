@@ -52,7 +52,6 @@ public class MainViewController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void initClock() {
@@ -69,6 +68,7 @@ public class MainViewController implements Initializable {
         writtenPassword = passwordField.getText();
         selectedStudent = studentModel.getStudentFromLogin(writtenLoginID,writtenPassword);
         if (selectedStudent != null){
+            studentModel.markAsPresent(selectedStudent);
             URL urlMoreInfo = new File("src/AttendanceChecker/GUI/Views/StudentView.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(urlMoreInfo);
             Scene scene = new Scene(root);

@@ -4,14 +4,14 @@ import javafx.beans.property.*;
 
 public class Student {
     private final int id;
-    private StringProperty name;
-    private ObjectProperty<Integer> absentDays;
-    private boolean presentToday;
+    private final StringProperty name;
+    private final IntegerProperty absentDays;
+    private final boolean presentToday;
 
     public Student(int id, String name, int absentDays, boolean presentToday){
         this.id = id;
         this.name = new SimpleStringProperty(name);
-        this.absentDays = new SimpleIntegerProperty(absentDays).asObject();
+        this.absentDays = new SimpleIntegerProperty(absentDays);
         this.presentToday = presentToday;
     }
 
@@ -35,7 +35,7 @@ public class Student {
         return absentDays.get();
     }
 
-    public ObjectProperty<Integer> absentDaysProperty() {
+    public IntegerProperty absentDaysProperty() {
         return absentDays;
     }
 

@@ -2,6 +2,8 @@ package AttendanceChecker.GUI.Controllers;
 
 import AttendanceChecker.Be.Student;
 import AttendanceChecker.GUI.Model.StudentModel;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class TeacherLoginViewController implements Initializable {
@@ -40,9 +43,10 @@ public class TeacherLoginViewController implements Initializable {
     @FXML
     public TableColumn<Student, String> studentNameColumn;
     @FXML
-    public TableColumn<Student, Integer> studentAttendanceColumn;
-    @FXML
     public TableColumn<Student, Integer> studentDaysAbsentColumn;
+    @FXML
+    public TableColumn<Student, Integer> studentAttendanceColumn;
+
 
 
 
@@ -52,15 +56,25 @@ public class TeacherLoginViewController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         try {
             studentObservableList = studentModel.getAllStudents();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         studentNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        // Mangler implementering
-        //studentAttendanceColumn.setCellValueFactory(cellData -> cellData.getValue().absentPercentProperty());
-        studentDaysAbsentColumn.setCellValueFactory(cellData -> cellData.getValue().absentDaysProperty());
+        studentDaysAbsentColumn.setCellValueFactory(cellData -> cellData.getValue().absentDaysProperty().asObject());
+        studentAttendanceColumn.setCellValueFactory(cellData -> {
+            int totalDays = 0;
+            try {
+                totalDays = studentModel.getTotalDays();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            int absentDays = cellData.getValue().absentDaysProperty().getValue();
+            ObservableValue<Integer> absentPercent = new SimpleIntegerProperty((absentDays/totalDays) * 100).asObject();
+            return absentPercent;
+        });
         studentList.setItems(studentObservableList);
     }
     public void handleShowInfo(ActionEvent actionEvent) throws IOException {
