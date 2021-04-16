@@ -19,7 +19,7 @@ public class Main extends Application {
         Thread thread = new Thread(rTM);
         thread.start();
         Parent root = FXMLLoader.load(getClass().getResource("GUI/Views/MainView.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Attendance Checker");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.setResizable(false);
         primaryStage.show();
