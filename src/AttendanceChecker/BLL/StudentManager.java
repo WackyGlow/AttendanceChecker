@@ -23,4 +23,7 @@ public class StudentManager {
     public Student getStudentFromLogin(String login,String password) throws SQLException {
         return loginDAO.getStudentFromLogin(login,password);
     }
+    public int getTotalDays() throws SQLException {
+        return studentDAO.getTotalDays();
+    }
 }

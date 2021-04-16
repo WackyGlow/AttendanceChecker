@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MoreInfoViewController implements Initializable {
@@ -31,7 +32,7 @@ public class MoreInfoViewController implements Initializable {
     @FXML
     public Label selectedStudentPercentageAbsence;
     private Student selectedStudent;
-
+    private int totalDays;
     private StudentManager studentManager;
     private ObservableList<Student> students;
     private StudentModel studentModel;
@@ -43,17 +44,23 @@ public class MoreInfoViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        selectedStudent = TeacherLoginViewController.getSelectedStudent();
-        selectedStudentName.setText(selectedStudent.getName());
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Absent", selectedStudent.getAbsentDays()),
-                        new PieChart.Data("Present", (100-selectedStudent.getAbsentDays())));
-        absencePieChart.setData(pieChartData);
-        absencePieChart.setTitle("Absence chart:");
-        // Mangler implementering!
-        //selectedStudentMostAbsentDay.setText();
-        //selectedStudentTotalAbsenceDays.setText();
-        //selectedStudentPercentageAbsence.setText();
+        try {
+            studentModel = new StudentModel();
+            totalDays = studentModel.getTotalDays();
+            selectedStudent = TeacherLoginViewController.getSelectedStudent();
+            selectedStudentName.setText(selectedStudent.getName());
+            ObservableList<PieChart.Data> pieChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("Absent", selectedStudent.getAbsentDays()),
+                            new PieChart.Data("Present", (totalDays-selectedStudent.getAbsentDays())));
+            absencePieChart.setData(pieChartData);
+            absencePieChart.setTitle("Absence chart:");
+            //Mangler implementering
+            selectedStudentMostAbsentDay.setText(selectedStudent.getAbsentDays() + "");
+            selectedStudentTotalAbsenceDays.setText(selectedStudent.getAbsentDays() + "");
+            selectedStudentPercentageAbsence.setText((selectedStudent.getAbsentDays()/studentModel.getTotalDays()) * 100 + "%");
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

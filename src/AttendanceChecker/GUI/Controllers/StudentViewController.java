@@ -15,10 +15,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements Initializable {
     private Student selectedStudent;
+    private StudentModel studentModel;
+    private int totalDays;
     @FXML
     public Label selectedStudentName;
     @FXML
@@ -39,17 +42,23 @@ public class StudentViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        selectedStudent = MainViewController.getSelectedStudent();
-        selectedStudentName.setText(selectedStudent.getName());
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Absent", selectedStudent.getAbsentDays()),
-                        // (Total Days - Days Absent) skal stå herunder i stedet for 100
-                        new PieChart.Data("Present", (100-selectedStudent.getAbsentDays())));
-        absencePieChart.setData(pieChartData);
-        absencePieChart.setTitle("Absence chart:");
-        selectedStudentMostAbsentDay.setText(selectedStudent.getAbsentDays() + "");
-        selectedStudentTotalAbsenceDays.setText(selectedStudent.getAbsentDays() + "");
-        selectedStudentPercentageAbsence.setText(selectedStudent.getAbsentDays() +"%");
+        try {
+            studentModel = new StudentModel();
+            totalDays = studentModel.getTotalDays();
+            selectedStudent = MainViewController.getSelectedStudent();
+            selectedStudentName.setText(selectedStudent.getName());
+            ObservableList<PieChart.Data> pieChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("Absent", selectedStudent.getAbsentDays()),
+                            new PieChart.Data("Present", (totalDays-selectedStudent.getAbsentDays())));
+            absencePieChart.setData(pieChartData);
+            absencePieChart.setTitle("Absence chart:");
+            //Mangler implementering
+            selectedStudentMostAbsentDay.setText(selectedStudent.getAbsentDays() + "");
+            selectedStudentTotalAbsenceDays.setText(selectedStudent.getAbsentDays() + "");
+            selectedStudentPercentageAbsence.setText((selectedStudent.getAbsentDays()/studentModel.getTotalDays()) * 100 + "%");
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
