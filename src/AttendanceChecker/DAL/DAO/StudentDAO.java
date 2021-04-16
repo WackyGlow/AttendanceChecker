@@ -140,7 +140,7 @@ public class StudentDAO {
         try (PreparedStatement st = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
             st.executeUpdate();
         } catch (SQLException exception){
-            throw new SQLException("could not add absence to "day" for:" + student.getName(), exception);
+            throw new SQLException("could not add absence to " + day + " for:" + student.getName(), exception);
 
         } finally {
             connectionPool.checkIn(con);
