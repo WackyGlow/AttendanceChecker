@@ -67,12 +67,37 @@ public class StudentDAO {
         }
     }
 
-    /* public void addToTotalDays() throws SQLException {
-        Connection con = connectionPool.checkOut();
-        int totalDays =
-        String sql = "UPDATE TotalDays SET Totaldays";
+
+    public int getTotalDays() throws SQLException {
+        int totalDays = 0;
+        try (Connection connection = connectionPool.checkOut()) {
+            String sql = "SELECT * FROM TotalDays;";
+            Statement statement = connection.createStatement();
+            if (statement.execute(sql)) {
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next()) {
+                    totalDays = resultSet.getInt("Totaldays");
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return totalDays;
     }
-    */
+    public void addToTotalDays() throws SQLException {
+        Connection con = connectionPool.checkOut();
+        int newTotalDays = getTotalDays() + 1;
+        String sql = "UPDATE TotalDays SET Totaldays =" + newTotalDays +";";
+        try (PreparedStatement st = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
+            st.executeUpdate();
+        } catch (SQLException exception){
+            throw new SQLException("could not add to total days", exception);
+
+        } finally {
+            connectionPool.checkIn(con);
+        }
+    }
+
 }
 
 
