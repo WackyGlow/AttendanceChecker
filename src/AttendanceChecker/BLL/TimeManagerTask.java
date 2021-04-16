@@ -33,7 +33,11 @@ public class TimeManagerTask {
             listOfStudents = sGetter.getAllStudents();
             for (Student S: listOfStudents) {
                 if(S.isPresentToday() == false){
-                    //add absent day in database
+                    try {
+                        sGetter.addToAbsentDays(S);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
                 if(S.isPresentToday() == true){
                     try {
@@ -44,7 +48,11 @@ public class TimeManagerTask {
                 }
 
             }
-            //add one to total days in database
+            try {
+                sGetter.addToTotalDays();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 }
