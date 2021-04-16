@@ -71,6 +71,7 @@ public class TeacherLoginViewController implements Initializable {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            
             int absentDays = cellData.getValue().absentDaysProperty().getValue();
             ObservableValue<Integer> absentPercent = new SimpleIntegerProperty((absentDays/totalDays) * 100).asObject();
             return absentPercent;
