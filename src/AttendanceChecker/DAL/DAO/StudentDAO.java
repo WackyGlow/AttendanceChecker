@@ -52,6 +52,19 @@ public class StudentDAO {
         }
     }
 
+    public void markStudentAsPresent(Student student) throws SQLException {
+        int studentID = student.getID();
+        Connection con = connectionPool.checkOut();
+        String sql = "UPDATE Student SET PresentToday = 1 WHERE StudentID = " + studentID + ";";
+        try (PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            throw new SQLException("Could not set attendance to 0 again", ex);
+        } finally {
+            connectionPool.checkIn(con);
+        }
+    }
+
 
     public void addToAbsentDays(Student student) throws SQLException {
         int studentID = student.getID();
