@@ -73,7 +73,9 @@ public class TeacherLoginViewController implements Initializable {
             }
             
             int absentDays = cellData.getValue().absentDaysProperty().getValue();
-            ObservableValue<Integer> absentPercent = new SimpleIntegerProperty((absentDays/totalDays) * 100).asObject();
+            double calculatedAbsence = ((double)absentDays/(double)totalDays) * 100;
+            int result = (int) calculatedAbsence;
+            ObservableValue<Integer> absentPercent = new SimpleIntegerProperty(result).asObject();
             return absentPercent;
         });
         studentList.setItems(studentObservableList);

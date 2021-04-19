@@ -57,7 +57,7 @@ public class MoreInfoViewController implements Initializable {
             absencePieChart.setTitle("Absence chart:");
             selectedStudentMostAbsentDay.setText(studentModel.getValueFromDay(selectedStudent));
             selectedStudentTotalAbsenceDays.setText(selectedStudent.getAbsentDays() + "");
-            selectedStudentPercentageAbsence.setText((selectedStudent.getAbsentDays()/studentModel.getTotalDays()) * 100 + "%");
+            selectedStudentPercentageAbsence.setText(((double)selectedStudent.getAbsentDays()/(double)studentModel.getTotalDays()) * 100 + "%");
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }

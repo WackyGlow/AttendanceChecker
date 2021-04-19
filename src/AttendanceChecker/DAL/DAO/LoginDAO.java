@@ -37,4 +37,17 @@ public class LoginDAO {
         }
         return student;
     }
+
+    public boolean validTeacherLogin(String password) throws SQLException {
+        Connection connection = connectionPool.checkOut();
+        String sql = "Select * From Teacher WHERE Teacher.TeacherCode = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, password);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

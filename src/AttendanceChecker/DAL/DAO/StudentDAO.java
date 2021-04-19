@@ -10,6 +10,7 @@ import java.util.List;
 public class StudentDAO {
 
     private final JDBCConnectionPool connectionPool;
+    private int totalDays;
 
     public StudentDAO() throws IOException {
         connectionPool = JDBCConnectionPool.getInstance();
@@ -82,9 +83,8 @@ public class StudentDAO {
 
 
     public int getTotalDays() throws SQLException {
-        int totalDays = 0;
         try (Connection connection = connectionPool.checkOut()) {
-            String sql = "SELECT * FROM TotalDays;";
+            String sql = "SELECT Totaldays FROM TotalDays;";
             Statement statement = connection.createStatement();
             if (statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();

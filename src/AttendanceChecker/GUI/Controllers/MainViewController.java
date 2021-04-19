@@ -2,6 +2,7 @@ package AttendanceChecker.GUI.Controllers;
 import AttendanceChecker.BLL.StudentManager;
 import AttendanceChecker.Be.Student;
 import AttendanceChecker.GUI.Model.StudentModel;
+import AttendanceChecker.GUI.Model.TeacherModel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,6 +27,7 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     private StudentModel studentModel;
+    private TeacherModel teacherModel;
     @FXML
     public Button confirmAttendance;
     @FXML
@@ -43,11 +45,13 @@ public class MainViewController implements Initializable {
     private static String writtenLoginID;
     private static String writtenPassword;
     private static Student selectedStudent;
+    private boolean validTeacherLogin;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             studentModel = new StudentModel();
+            teacherModel = new TeacherModel();
             initClock();
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,20 +93,32 @@ public class MainViewController implements Initializable {
         }
     }
 
-    public void handleTeacherLogin(ActionEvent actionEvent) {
-        try {
-            URL urlTeacher = new File("src/AttendanceChecker/GUI/Views/TeacherLoginView.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(urlTeacher);
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("Hello Teacher");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.show();
+    public void handleTeacherLogin(ActionEvent actionEvent) throws SQLException {
+        writtenPassword = passwordField.getText();
+        validTeacherLogin = teacherModel.validTeacherLogin(writtenPassword);
+        if (validTeacherLogin) {
+            try {
+                URL urlTeacher = new File("src/AttendanceChecker/GUI/Views/TeacherLoginView.fxml").toURI().toURL();
+                Parent root = FXMLLoader.load(urlTeacher);
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setTitle("Hello Teacher");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error occurred");
+            alert.setHeaderText("Wrong Login");
+            alert.setContentText("Please try again!");
+            alert.showAndWait();
+            loginIdField.clear();
+            passwordField.clear();
         }
     }
 
