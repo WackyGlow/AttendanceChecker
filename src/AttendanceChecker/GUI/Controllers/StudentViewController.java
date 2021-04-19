@@ -53,8 +53,7 @@ public class StudentViewController implements Initializable {
                             new PieChart.Data("Present", (totalDays-selectedStudent.getAbsentDays())));
             absencePieChart.setData(pieChartData);
             absencePieChart.setTitle("Absence chart:");
-            //Mangler implementering
-            selectedStudentMostAbsentDay.setText(selectedStudent.getAbsentDays() + "");
+            selectedStudentMostAbsentDay.setText(studentModel.getValueFromDay(selectedStudent));
             selectedStudentTotalAbsenceDays.setText(selectedStudent.getAbsentDays() + "");
             selectedStudentPercentageAbsence.setText((selectedStudent.getAbsentDays()/studentModel.getTotalDays()) * 100 + "%");
         } catch (IOException | SQLException e) {

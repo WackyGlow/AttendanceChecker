@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,15 +24,11 @@ import java.util.ResourceBundle;
 public class CorrectErrorViewController implements Initializable {
 
     @FXML
-    public BorderPane correctErrorPane;
+    private Button cancelCorrectDate;
     @FXML
-    public Button cancelCorrectDate;
+    private Button confirmCorrectDate;
     @FXML
-    public Button confirmCorrectDate;
-    @FXML
-    public DatePicker correctDateSelect;
-    @FXML
-    public TextField correctStudentId;
+    private DatePicker correctDateSelect;
 
     private LocalDate selectedDate;
     private AttendanceManager attendanceManager;
@@ -49,10 +46,12 @@ public class CorrectErrorViewController implements Initializable {
         }
     }
 
-    public void handleConfirmCorrectDate(ActionEvent actionEvent) {
+    public void handleConfirmCorrectDate(ActionEvent actionEvent) throws SQLException {
         selectedDate = correctDateSelect.getValue();
         day = attendanceManager.localDateToDayOfWeek(selectedDate);
         if (day != null) {
+            attendanceManager.removefromAbsentDays(selectedStudent);
+            attendanceManager.removeFromMostDayAbsentDay(selectedStudent,day);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("");

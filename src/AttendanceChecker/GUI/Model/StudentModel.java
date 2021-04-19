@@ -33,5 +33,8 @@ public class StudentModel {
     public void markAsPresent(Student student) throws IOException, SQLException {
         attendanceManager.markAsPresent(student);
     }
+    public String getValueFromDay(Student student){
+        return attendanceManager.getValueFromDay(student);
+    }
 }
 
