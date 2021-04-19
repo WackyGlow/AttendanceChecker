@@ -134,7 +134,7 @@ public class StudentDAO {
         Connection con = connectionPool.checkOut();
         int studentId = student.getID();
         String day = specifiedDay.substring(0,1).toUpperCase() + specifiedDay.substring(1).toLowerCase();
-        int oldValueFromDay =getValueFromDay(student,day);
+        int oldValueFromDay = getValueFromDay(student,day);
         int valuetoAdd = 1;
         String sql = "UPDATE MostAbsentDay SET "+ day +" = " + (oldValueFromDay + valuetoAdd) + " WHERE StudentID = " + studentId + ";";
         try (PreparedStatement st = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
@@ -146,6 +146,37 @@ public class StudentDAO {
             connectionPool.checkIn(con);
         }
     }
+
+    public void removeFromMostDayAbsentDay(Student student, String specifiedDay) {
+        Connection con= connectionPool.checkOut();
+        int studentID = student.getID();
+        String day = specifiedDay.substring(0,1).toUpperCase() + specifiedDay.substring(1).toLowerCase();
+        int oldValueFromDay = getValueFromDay(student,day);
+        int valuetoAdd = -1;
+        String sql = "UPDATE MostAbsentDay SET "+ day +" = " + (oldValueFromDay + valuetoAdd) + " WHERE StudentID = " + studentID + ";";
+        try (PreparedStatement st = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)){
+            st.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } finally {
+            connectionPool.checkIn(con);
+        }
+    }
+
+    public void removeFromTotalDays() throws SQLException {
+        Connection con = connectionPool.checkOut();
+        int newTotalDays = getTotalDays() + -1;
+        String sql = "UPDATE TotalDays SET Totaldays =" + newTotalDays +";";
+        try (PreparedStatement st = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
+            st.executeUpdate();
+        } catch (SQLException exception){
+            throw new SQLException("could not add to total days", exception);
+
+        } finally {
+            connectionPool.checkIn(con);
+        }
+    }
+
 
 }
 
