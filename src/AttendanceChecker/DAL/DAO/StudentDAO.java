@@ -163,15 +163,16 @@ public class StudentDAO {
         }
     }
 
-    public void removeFromTotalDays() throws SQLException {
+    public void removefromAbsentDays(Student student) throws SQLException {
+        int studentID = student.getID();
+        int absentDays = student.getAbsentDays();
+        int daysToSubtract = -1;
         Connection con = connectionPool.checkOut();
-        int newTotalDays = getTotalDays() + -1;
-        String sql = "UPDATE TotalDays SET Totaldays =" + newTotalDays +";";
-        try (PreparedStatement st = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
+        String sql = "UPDATE Student SET AbsentDays =" + (absentDays + daysToSubtract) + "WHERE StudentID =" + studentID + ";";
+        try (PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             st.executeUpdate();
-        } catch (SQLException exception){
-            throw new SQLException("could not add to total days", exception);
-
+        } catch (SQLException ex) {
+            throw new SQLException("Could not update AbsentDays in Student",ex);
         } finally {
             connectionPool.checkIn(con);
         }
