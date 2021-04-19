@@ -104,6 +104,7 @@ public class TeacherLoginViewController implements Initializable {
     }
 
     public void handleCorrectErrorButton(ActionEvent actionEvent) {
+        selectedStudent = studentList.getSelectionModel().getSelectedItem();
         try {
             URL url = new File("src/AttendanceChecker/GUI/Views/CorrectErrorView.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);

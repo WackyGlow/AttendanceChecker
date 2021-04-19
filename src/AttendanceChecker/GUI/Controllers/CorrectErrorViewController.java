@@ -1,5 +1,7 @@
 package AttendanceChecker.GUI.Controllers;
 
+import AttendanceChecker.BLL.AttendanceManager;
+import AttendanceChecker.Be.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,7 +13,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CorrectErrorViewController implements Initializable {
@@ -27,24 +33,40 @@ public class CorrectErrorViewController implements Initializable {
     @FXML
     public TextField correctStudentId;
 
-    @FXML
-    private BackgroundImage background = new BackgroundImage(new Image("AttendanceChecker/Resources/Background.png",
-            800,600,false,true),
-            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-            BackgroundSize.DEFAULT);
+    private LocalDate selectedDate;
+    private AttendanceManager attendanceManager;
+    private Student selectedStudent;
+    private String day;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            attendanceManager = new AttendanceManager();
+            selectedStudent = TeacherLoginViewController.getSelectedStudent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleConfirmCorrectDate(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("");
-        alert.setContentText("You attendance has been marked.");
-        alert.showAndWait();
-        Stage stage = (Stage) confirmCorrectDate.getScene().getWindow();
-        stage.close();
+        selectedDate = correctDateSelect.getValue();
+        day = attendanceManager.localDateToDayOfWeek(selectedDate);
+        if (day != null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("");
+            alert.setContentText("You attendance has been marked.");
+            alert.showAndWait();
+            Stage stage = (Stage) confirmCorrectDate.getScene().getWindow();
+            stage.close();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("");
+            alert.setContentText("Please select a valid date.");
+            alert.showAndWait();
+        }
     }
 
     public void handleCancelCorrectDate(ActionEvent actionEvent) {
