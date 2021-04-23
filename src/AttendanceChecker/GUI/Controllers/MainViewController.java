@@ -58,6 +58,9 @@ public class MainViewController implements Initializable {
         }
     }
 
+    /**
+     * initializes the clock
+     */
     private void initClock() {
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy - HH:mm:ss");
@@ -67,6 +70,11 @@ public class MainViewController implements Initializable {
         clock.play();
     }
 
+    /**
+     *
+     * @param actionEvent
+     * @throws Exception
+     */
     public void handleConfirmAttendance(ActionEvent actionEvent) throws Exception {
         writtenLoginID = loginIdField.getText();
         writtenPassword = passwordField.getText();
@@ -93,6 +101,11 @@ public class MainViewController implements Initializable {
         }
     }
 
+    /**
+     * handles The teacher Login button
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void handleTeacherLogin(ActionEvent actionEvent) throws SQLException {
         writtenPassword = passwordField.getText();
         validTeacherLogin = teacherModel.validTeacherLogin(writtenPassword);
@@ -122,6 +135,10 @@ public class MainViewController implements Initializable {
         }
     }
 
+    /**
+     * returns a selected student
+     * @return
+     */
     public static Student getSelectedStudent() {
         return selectedStudent;
     }

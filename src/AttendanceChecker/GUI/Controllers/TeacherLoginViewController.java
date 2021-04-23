@@ -48,8 +48,10 @@ public class TeacherLoginViewController implements Initializable {
     public TableColumn<Student, Integer> studentAttendanceColumn;
 
 
-
-
+    /**
+     * constructor fot the controller
+     * @throws IOException
+     */
     public TeacherLoginViewController() throws IOException {
         studentList = new TableView<>();
         studentModel = new StudentModel();
@@ -95,16 +97,27 @@ public class TeacherLoginViewController implements Initializable {
         }
     }
 
+    /**
+     * returns a selected student
+     * @return
+     */
     public static Student getSelectedStudent() {
         return selectedStudent;
     }
 
-
+    /**
+     * handles the logout for the teacher which just closes the stage
+     * @param actionEvent
+     */
     public void handleLogoutTeacher(ActionEvent actionEvent) {
         Stage stage = (Stage) logoutTeacher.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * handles the correct error button and opens a new stage.
+     * @param actionEvent
+     */
     public void handleCorrectErrorButton(ActionEvent actionEvent) {
         selectedStudent = studentList.getSelectionModel().getSelectedItem();
         try {

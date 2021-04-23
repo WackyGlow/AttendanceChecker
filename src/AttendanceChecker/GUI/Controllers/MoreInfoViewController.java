@@ -37,6 +37,10 @@ public class MoreInfoViewController implements Initializable {
     private ObservableList<Student> students;
     private StudentModel studentModel;
 
+    /**
+     * handles closing the stage
+     * @param actionEvent
+     */
     public void handleCloseMoreInfo(ActionEvent actionEvent) {
         Stage stage = (Stage) closeMoreInfo.getScene().getWindow();
         stage.close();

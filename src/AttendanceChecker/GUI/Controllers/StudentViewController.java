@@ -35,6 +35,10 @@ public class StudentViewController implements Initializable {
     @FXML
     public Label selectedStudentPercentageAbsence;
 
+    /**
+     * handles closing the stage
+     * @param actionEvent
+     */
     public void handleCloseStudentInfo(ActionEvent actionEvent) {
         Stage stage = (Stage) closeStudentInfo.getScene().getWindow();
         stage.close();

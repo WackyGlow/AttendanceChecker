@@ -46,6 +46,11 @@ public class CorrectErrorViewController implements Initializable {
         }
     }
 
+    /**
+     * handles the confirm correction button
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void handleConfirmCorrectDate(ActionEvent actionEvent) throws SQLException {
         selectedDate = correctDateSelect.getValue();
         day = attendanceManager.localDateToDayOfWeek(selectedDate);
@@ -68,6 +73,10 @@ public class CorrectErrorViewController implements Initializable {
         }
     }
 
+    /**
+     * handles the cancel button
+     * @param actionEvent
+     */
     public void handleCancelCorrectDate(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelCorrectDate.getScene().getWindow();
         stage.close();
