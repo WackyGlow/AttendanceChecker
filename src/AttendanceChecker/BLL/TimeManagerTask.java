@@ -19,6 +19,10 @@ public class TimeManagerTask {
     {
         private List<Student> listOfStudents;
 
+        /**
+         * the run method is used to registere who was present today, and what day today is,
+         * and the comunicate it to the database
+         */
         public void run()
         {
 

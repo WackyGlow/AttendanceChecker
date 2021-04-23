@@ -8,6 +8,9 @@ public class RunnableTimeManager implements Runnable{
 
     }
 
+    /**
+     * the run method creates a TimeManager object, then calls the timeKeeper methode.
+     */
     @Override
     public void run() {
         TimeManager tM = new TimeManager();
