@@ -21,41 +21,11 @@ public class TimeManagerTask {
 
         public void run()
         {
-            //needs a for each loop that adds absent days to unmarked students, as
-            //as well as a method to add 1 day to total days in the database
+
             listOfStudents = new ArrayList<>();
             Calendar c = Calendar.getInstance();
             int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
             String day = "day";
-            /*
-            //Second Iteration of DayFinder, not sure if it is better to use else if or switch case in this case.
-            switch (dayOfWeek){
-
-                case 2:
-                    day = "monday";
-                    break;
-
-                case 3:
-                    day = "tuesday";
-                    break;
-
-                case 4:
-                    day = "wednesday";
-                    break;
-
-                case 5:
-                    day = "Thursday";
-                    break;
-
-                case 6:
-                    day = "friday";
-                    break;
-
-                default:
-                    day = null;
-                    break;
-            }
-            */
             if(dayOfWeek == 2){
                 day = "monday";
             }
